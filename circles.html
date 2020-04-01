@@ -8,6 +8,9 @@
 
 	<script type="text/paperscript" canvas="myCanvas">
 
+		// An array of objects to assign each keyboard key
+		// a sound and colour associated with it
+		// Hardcoded 
 		var keyData = {
 			q: {
 				sound: new Howl({
@@ -167,11 +170,13 @@
 			}
 		}
 
+		// Stores the circle to be drawn in an array
 		var circle_list = [];
 
 		function onKeyDown(event){
-
 			if(keyData[event.key]){
+
+				// Choosing a point
 				var max_point = new Point(view.size.width, view.size.height)
 				var randomPoint = Point.random();
 				var MyPoint = randomPoint*max_point;
@@ -195,10 +200,10 @@
 		
 		function onFrame(event){
 			for(var i=0;i<circle_list.length; i++){
-				circle_list[i].fillColor.hue += 1;
-				circle_list[i].scale(0.94);
+				circle_list[i].fillColor.hue += 1; // Colour changing effect
+				circle_list[i].scale(0.94);		   // Radius reducing effect
 
-				if(circle_list[i].area < 1.0){
+				if(circle_list[i].area < 1.0){	   // Important to free up array space
 					circle_list[i].remove();
 					circle_list.splice(i,1);
 					// console.log(circle_list.length);
